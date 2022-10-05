@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="src/main/resources/META-INF/pluginIcon.svg" alt="drawing" width="200" />
+</p>
+
 # Theme toggler
 
 Theme Toggler's plugin for all JetBrains based IDEs allows you to
@@ -5,7 +9,7 @@ change IntelliJ theme in one click 👩‍💻.
 
 # Version
 
-1.0-SNAPSHOT
+1.0.0
 
 # Supported themes
 
