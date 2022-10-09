@@ -1,5 +1,7 @@
 <p align="center">
-    <img src="src/main/resources/META-INF/pluginIcon.svg" alt="drawing" width="200" />
+    <img src="src/main/resources/META-INF/pluginIcon_dark.svg" alt="drawing" width="150" />
+    &nbsp;
+    <img src="src/main/resources/META-INF/pluginIcon.svg" alt="drawing" width="150" />
 </p>
 
 # Switch the theme in one click!
