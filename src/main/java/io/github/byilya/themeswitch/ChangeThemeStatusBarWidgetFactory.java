@@ -1,4 +1,4 @@
-package io.theme.toggler.themetoggler;
+package io.github.byilya.themeswitch;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.StatusBar;
@@ -9,17 +9,17 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 public class ChangeThemeStatusBarWidgetFactory implements StatusBarWidgetFactory {
-    private static final String THEME_TOGGLER_ID = "theme-toggler";
-    private static final String THEME_TOGGLER_DISPLAY_NAME = "Theme toggler";
+    private static final String THEME_SWITCH_PLUGIN_ID = "theme-switch";
+    private static final String THEME_SWITCH_PLUGIN_NAME = "Theme switch";
 
     @Override
     public @NonNls @NotNull String getId() {
-        return THEME_TOGGLER_ID;
+        return THEME_SWITCH_PLUGIN_ID;
     }
 
     @Override
     public @Nls @NotNull String getDisplayName() {
-        return THEME_TOGGLER_DISPLAY_NAME;
+        return THEME_SWITCH_PLUGIN_NAME;
     }
 
     @Override

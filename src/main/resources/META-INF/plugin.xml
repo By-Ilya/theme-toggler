@@ -5,8 +5,8 @@
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>Theme Toggler</name>
-    <version>1.0.0</version>
+    <name>Theme Switch</name>
+    <version>1.0.1</version>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="il.byckoff2011@hotmail.com" url="https://www.github.com/By-Ilya">Ilya Bykov</vendor>
@@ -15,22 +15,22 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <h1 id="theme-toggler">Theme toggler</h1>
+        <h1 id="theme-switch">Switch the theme in one click!</h1>
         <p>
-            Theme Toggler's plugin allows you to change IntelliJ theme fastly. 👩‍💻
+            The plugin enables you to switch themes fast. When you are in bright sun - you need a white theme,
+            when you are in a dark room you need a dark theme. No more searching for the settings in preferences,
+            just one click, and you are all set up.👩‍💻
             <br><br>
         </p>
 
         <h2 id="supported-themes">Supported themes</h2>
         <p>
-            Currently, there are two supported themes:
+            Supports base IntelliJ IDEA themes:
             <ul>
                 <li>IntelliJ IDEA Light</li>
-                <li>Darcula</li>
+                <li>Dracula</li>
             </ul>
-            <br>
-            You can switch between describes themes by using only one button.
-            <br><br><br>
+            <br><br>
 
             Enjoy,
         </p>
@@ -46,7 +46,7 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <statusBarWidgetFactory
-                implementation="io.theme.toggler.themetoggler.ChangeThemeStatusBarWidgetFactory"
+                implementation="io.github.byilya.themeswitch.ChangeThemeStatusBarWidgetFactory"
         />
     </extensions>
 </idea-plugin>

@@ -1,4 +1,4 @@
-package io.theme.toggler.themetoggler;
+package io.github.byilya.themeswitch;
 
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.actions.QuickChangeLookAndFeel;

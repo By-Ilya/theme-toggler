@@ -2,23 +2,21 @@
     <img src="src/main/resources/META-INF/pluginIcon.svg" alt="drawing" width="200" />
 </p>
 
-# Theme toggler
+# Switch the theme in one click!
 
-Theme Toggler's plugin for all JetBrains based IDEs allows you to
-change IntelliJ theme in one click 👩‍💻.
+The plugin enables you to switch themes fast. When you are in bright sun - you need a white theme, when you are in 
+a dark room you need a dark theme. No more searching for the settings in preferences, just one click, and you are 
+all set up.👩‍💻
 
 # Version
 
-1.0.0
+1.0.1
 
 # Supported themes
 
-Currently, there are two supported themes:
+Supports base IntelliJ IDEA themes:
 - IntelliJ IDEA Light
-- Darcula
-
-You can switch between describes themes by using only one button
-on the IDE bottom status bar.
+- Dracula
 
 # Plugin screenshots
 

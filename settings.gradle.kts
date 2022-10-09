@@ -1,1 +1,1 @@
-rootProject.name = "theme-toggler"
+rootProject.name = "theme-switch"
