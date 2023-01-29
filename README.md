@@ -12,21 +12,26 @@ all set up.👩‍💻
 
 # Version
 
-1.0.1
+1.1.0
 
 # Supported themes
 
-Supports base IntelliJ IDEA themes:
-- IntelliJ IDEA Light
-- Dracula
+For default plugin uses two default IntelliJ themes for light and dark states: 
+- **Light state:** IntelliJ IDEA Light
+- **Dark state:** Darcula
+
+Plugin supports choosing own themes for light and dark states. You can do it in _Settings -> Appearance & Behavior
+-> Theme Switch_.
+
+![Theme Switch settings](doc/pluginSettings.png)
 
 # Plugin screenshots
 
-![Theme switcher button (light theme)](doc/light.png?raw=true "Theme switcher button (light theme)")
+![Theme Switch button (light theme)](doc/light.png?raw=true "Theme switcher button (light theme)")
 
-![Theme switcher button (dark theme)](doc/dark.png?raw=true "Theme switcher button (dark theme)")
+![Theme Switch button (dark theme)](doc/dark.png?raw=true "Theme switcher button (dark theme)")
 
-<br><br>
+<br>
 
 Enjoy,
 

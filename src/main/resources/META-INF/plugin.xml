@@ -6,7 +6,7 @@
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
     <name>Theme Switch</name>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
     <vendor email="il.byckoff2011@hotmail.com" url="https://www.github.com/By-Ilya">Ilya Bykov</vendor>
@@ -25,11 +25,15 @@
 
         <h2 id="supported-themes">Supported themes</h2>
         <p>
-            Supports base IntelliJ IDEA themes:
+            For default plugin uses two default IntelliJ themes for light and dark states:
             <ul>
-                <li>IntelliJ IDEA Light</li>
-                <li>Dracula</li>
+                <li><b>Light state:</b> IntelliJ IDEA Light</li>
+                <li><b>Dark state:</b> Darcula</li>
             </ul>
+
+            Plugin supports choosing own themes for light and dark states. You can do it in <i>Settings ->
+            Appearance & Behavior -> Theme Switch</i>.
+
             <br><br>
 
             Enjoy,
@@ -47,6 +51,15 @@
     <extensions defaultExtensionNs="com.intellij">
         <statusBarWidgetFactory
                 implementation="io.github.byilya.themeswitch.ChangeThemeStatusBarWidgetFactory"
+        />
+        <applicationConfigurable
+                parentId="appearance"
+                instance="io.github.byilya.themeswitch.themesettings.ThemeSettingsConfigurable"
+                id="io.github.byilya.themeswitch.themesettings.ThemeSettingsConfigurable"
+                displayName="Theme Switch"
+        />
+        <applicationService
+                serviceImplementation="io.github.byilya.themeswitch.themesettings.ThemeSettingsState"
         />
     </extensions>
 </idea-plugin>
