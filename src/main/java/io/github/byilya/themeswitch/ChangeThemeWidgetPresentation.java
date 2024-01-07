@@ -13,6 +13,8 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 
 public class ChangeThemeWidgetPresentation implements StatusBarWidget.IconPresentation {
+    private final ThemeSwitchHelpers themeSwitchHelpers = new ThemeSwitchHelpers();
+
     @Override
     public @Nullable Icon getIcon() {
         return AllIcons.Actions.IntentionBulbGrey;
@@ -25,6 +27,6 @@ public class ChangeThemeWidgetPresentation implements StatusBarWidget.IconPresen
 
     @Override
     public @Nullable Consumer<MouseEvent> getClickConsumer() {
-        return mouseEvent -> ThemeSwitchHelpers.changeTheme(true);
+        return mouseEvent -> this.themeSwitchHelpers.changeTheme(true);
     }
 }

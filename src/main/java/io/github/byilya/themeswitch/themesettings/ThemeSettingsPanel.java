@@ -1,55 +1,47 @@
 package io.github.byilya.themeswitch.themesettings;
 
+import com.intellij.ide.ui.laf.UIThemeLookAndFeelInfo;
 import com.intellij.openapi.ui.ComboBox;
+import kotlin.sequences.Sequence;
 
 import java.awt.*;
 import java.util.function.Consumer;
 
 import javax.swing.*;
 
+@SuppressWarnings("UnstableApiUsage")
 class ThemeSettingsPanel {
   private static final String PANEL_TITLE = "Choose preferred themes for Light & Dark states";
   private static final JLabel LIGHT_THEME_LABEL = new JLabel("Light theme:");
   private static final JLabel DARK_THEME_LABEL = new JLabel("Dark theme:");
 
-  private static void formThemesSelectionList(
+  private final ThemesManager themesManager = new ThemesManager();
+  private final ThemeSwitchHelpers themeSwitchHelpers = new ThemeSwitchHelpers();
+
+  private void formThemesSelectionList(
           JComboBox<String> themesComboBox,
           String installedThemeId,
           boolean isDark,
-          Consumer<UIManager.LookAndFeelInfo> onChangeSelected
+          Consumer<UIThemeLookAndFeelInfo> onChangeSelected
   ) {
-    UIManager.LookAndFeelInfo[] themesToAttach = ThemeHelpers.getAllInstalledThemes();
+    Sequence<UIThemeLookAndFeelInfo> allThemes = this.themesManager.getInstalledThemes();
+    allThemes.iterator().forEachRemaining((UIThemeLookAndFeelInfo theme) -> themesComboBox.addItem(theme.getName()));
 
-    int themeIndexToSelect = -1;
-    for (int i = 0; i < themesToAttach.length; i++) {
-      themesComboBox.addItem(themesToAttach[i].getName());
-      if (ThemeHelpers.isEqualThemes(themesToAttach[i], installedThemeId)) {
-        themeIndexToSelect = i;
-      }
-    }
-
-    if (themeIndexToSelect == -1) {
-      themeIndexToSelect = ThemeSwitchHelpers.getFallbackThemeIndex(themesToAttach, isDark);
-    }
+    int themeIndexToSelect = this.themeSwitchHelpers.getInstalledThemeIndexById(installedThemeId, isDark);
+    System.out.println(installedThemeId + " " + themeIndexToSelect + " " + isDark);
 
     themesComboBox.setSelectedIndex(themeIndexToSelect);
-    themesComboBox.addActionListener(e -> onChangeSelected.accept(themesToAttach[themesComboBox.getSelectedIndex()]));
+    themesComboBox.addActionListener(e -> onChangeSelected.accept(
+            this.themeSwitchHelpers.findThemeByIndex(themesComboBox.getSelectedIndex())
+    ));
   }
 
-  private static void resetSelectionList(JComboBox<String> comboBox, String previousInstalledThemeId, boolean isDark) {
-    UIManager.LookAndFeelInfo[] themesList = ThemeHelpers.getAllInstalledThemes();
-
-    int themeIndexToSelect = -1;
-    for (int i = 0; i < themesList.length; i++) {
-      if (ThemeHelpers.isEqualThemes(themesList[i], previousInstalledThemeId)) {
-        themeIndexToSelect = i;
-      }
-    }
-
-    if (themeIndexToSelect == -1) {
-      themeIndexToSelect = ThemeSwitchHelpers.getFallbackThemeIndex(themesList, isDark);
-    }
-
+  private void resetThemesSelectionList(
+          JComboBox<String> comboBox,
+          String previousInstalledThemeId,
+          boolean isDark
+  ) {
+    int themeIndexToSelect = this.themeSwitchHelpers.getInstalledThemeIndexById(previousInstalledThemeId, isDark);
     comboBox.setSelectedIndex(themeIndexToSelect);
   }
 
@@ -59,16 +51,16 @@ class ThemeSettingsPanel {
   protected ThemeSettingsPanel(
           String installedLightThemeId,
           String installedDarkThemeId,
-          Consumer<UIManager.LookAndFeelInfo> onChangeLightTheme,
-          Consumer<UIManager.LookAndFeelInfo> onChangeDarkTheme
+          Consumer<UIThemeLookAndFeelInfo> onChangeLightTheme,
+          Consumer<UIThemeLookAndFeelInfo> onChangeDarkTheme
   ) {
     formThemesSelectionList(this.lightThemesComboBox, installedLightThemeId, false, onChangeLightTheme);
     formThemesSelectionList(this.darkThemesComboBox, installedDarkThemeId, true, onChangeDarkTheme);
   }
 
   protected void resetSelectedThemes(String previousInstalledLightThemeId, String previousInstalledDarkThemeId) {
-    resetSelectionList(this.lightThemesComboBox, previousInstalledLightThemeId, false);
-    resetSelectionList(this.darkThemesComboBox, previousInstalledDarkThemeId, true);
+    resetThemesSelectionList(this.lightThemesComboBox, previousInstalledLightThemeId, false);
+    resetThemesSelectionList(this.darkThemesComboBox, previousInstalledDarkThemeId, true);
   }
 
   protected JComponent getComponent() {
