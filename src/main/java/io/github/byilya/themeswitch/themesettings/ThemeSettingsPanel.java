@@ -28,7 +28,6 @@ class ThemeSettingsPanel {
     allThemes.iterator().forEachRemaining((UIThemeLookAndFeelInfo theme) -> themesComboBox.addItem(theme.getName()));
 
     int themeIndexToSelect = this.themeSwitchHelpers.getInstalledThemeIndexById(installedThemeId, isDark);
-    System.out.println(installedThemeId + " " + themeIndexToSelect + " " + isDark);
 
     themesComboBox.setSelectedIndex(themeIndexToSelect);
     themesComboBox.addActionListener(e -> onChangeSelected.accept(
