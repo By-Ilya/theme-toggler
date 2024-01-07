@@ -50,6 +50,7 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <statusBarWidgetFactory
+                id="theme-switch"
                 implementation="io.github.byilya.themeswitch.ChangeThemeStatusBarWidgetFactory"
         />
         <applicationConfigurable
