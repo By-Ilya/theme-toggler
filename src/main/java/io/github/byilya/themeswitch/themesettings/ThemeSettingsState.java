@@ -12,10 +12,32 @@ import org.jetbrains.annotations.Nullable;
         name = "io.github.byilya.themeswitch.themesettings.ThemeSettingsState",
         storages = @Storage("ThemeSwitchPluginSettings.xml")
 )
+@SuppressWarnings("UnstableApiUsage")
 public class ThemeSettingsState implements PersistentStateComponent<ThemeSettingsState> {
-    public String lightThemeId = ThemeHelpers.getThemeId(ThemeHelpers.getBaseLightTheme());
-    public String darkThemeId = ThemeHelpers.getThemeId(ThemeHelpers.getBaseDarkTheme());
-    public boolean isUnderDarculaState = ThemeHelpers.isIdeaUnderDarcula();
+    private final ThemesManager themesManager = new ThemesManager();
+
+    public String lightThemeId = this.themesManager.getDefaultLightTheme().getId();
+    public String darkThemeId = this.themesManager.getDefaultDarkTheme().getId();
+    public boolean isUnderDarculaState = this.themesManager.isIdeaUnderDarcula();
+
+    protected void switchIsIdeaUnderDarcula(boolean withChangingState) {
+        if (withChangingState) {
+            this.isUnderDarculaState = !this.isUnderDarculaState;
+        }
+    }
+
+    @Nullable
+    protected String getNextThemeIdToInstall(boolean withChangingState) {
+        String nextThemId;
+
+        if (withChangingState) {
+            nextThemId = this.isUnderDarculaState ? this.lightThemeId : this.darkThemeId;
+        } else {
+            nextThemId = this.isUnderDarculaState ? this.darkThemeId : this.lightThemeId;
+        }
+
+        return nextThemId;
+    }
 
     public static ThemeSettingsState getInstance() {
         return ApplicationManager.getApplication().getService(ThemeSettingsState.class);
