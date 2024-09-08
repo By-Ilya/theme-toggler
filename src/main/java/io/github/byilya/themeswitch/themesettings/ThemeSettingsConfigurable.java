@@ -32,11 +32,10 @@ public class ThemeSettingsConfigurable implements Configurable {
   public @Nullable JComponent createComponent() {
     ThemeSettingsState settingsState = ThemeSettingsState.getInstance();
     this.themeSettingsPanel = new ThemeSettingsPanel(
-            settingsState.lightThemeId,
-            settingsState.darkThemeId,
-            this::changeLightTheme,
-            this::changeDarkTheme
-    );
+        settingsState.lightThemeId,
+        settingsState.darkThemeId,
+        this::changeLightTheme,
+        this::changeDarkTheme);
 
     return this.themeSettingsPanel.getComponent();
   }
@@ -46,7 +45,7 @@ public class ThemeSettingsConfigurable implements Configurable {
     ThemeSettingsState settingsState = ThemeSettingsState.getInstance();
 
     return !settingsState.lightThemeId.equals(this.updatingLightThemeId) ||
-            !settingsState.darkThemeId.equals(this.updatingDarkThemeId);
+        !settingsState.darkThemeId.equals(this.updatingDarkThemeId);
   }
 
   @Override

@@ -16,7 +16,7 @@ public class ThemesManager {
         return aTheme.getId().equals(bTheme.getId());
     }
 
-    protected static  boolean isEqualThemes(String aThemeId, UIThemeLookAndFeelInfo bTheme) {
+    protected static boolean isEqualThemes(String aThemeId, UIThemeLookAndFeelInfo bTheme) {
         return aThemeId.equals(bTheme.getId());
     }
 
