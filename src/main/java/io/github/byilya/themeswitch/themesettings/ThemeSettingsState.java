@@ -8,10 +8,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@State(
-        name = "io.github.byilya.themeswitch.themesettings.ThemeSettingsState",
-        storages = @Storage("ThemeSwitchPluginSettings.xml")
-)
+@State(name = "io.github.byilya.themeswitch.themesettings.ThemeSettingsState", storages = @Storage("ThemeSwitchPluginSettings.xml"))
 @SuppressWarnings("UnstableApiUsage")
 public class ThemeSettingsState implements PersistentStateComponent<ThemeSettingsState> {
     private final ThemesManager themesManager = new ThemesManager();
@@ -27,10 +24,10 @@ public class ThemeSettingsState implements PersistentStateComponent<ThemeSetting
     }
 
     @Nullable
-    protected String getNextThemeIdToInstall(boolean withChangingState) {
+    protected String getNextThemeIdToInstall(boolean shouldChangeState) {
         String nextThemId;
 
-        if (withChangingState) {
+        if (shouldChangeState) {
             nextThemId = this.isUnderDarculaState ? this.lightThemeId : this.darkThemeId;
         } else {
             nextThemId = this.isUnderDarculaState ? this.darkThemeId : this.lightThemeId;

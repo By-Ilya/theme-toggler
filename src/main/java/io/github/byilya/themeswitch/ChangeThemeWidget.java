@@ -20,8 +20,10 @@ public class ChangeThemeWidget implements StatusBarWidget {
     }
 
     @Override
-    public void install(@NotNull StatusBar statusBar) {}
+    public void install(@NotNull StatusBar statusBar) {
+    }
 
     @Override
-    public void dispose() {}
+    public void dispose() {
+    }
 }

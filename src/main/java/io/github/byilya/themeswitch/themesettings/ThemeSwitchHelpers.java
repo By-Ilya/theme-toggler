@@ -13,7 +13,8 @@ public class ThemeSwitchHelpers {
     @Nullable
     private Integer findThemeIndexById(String themeId) {
         AtomicReference<Integer> iAtom = new AtomicReference<>(0);
-        @Nullable AtomicReference<Integer> foundThemeIndexAtom = new AtomicReference<>(null);
+        @Nullable
+        AtomicReference<Integer> foundThemeIndexAtom = new AtomicReference<>(null);
 
         Sequence<UIThemeLookAndFeelInfo> allThemes = this.themesManager.getInstalledThemes();
         allThemes.iterator().forEachRemaining((UIThemeLookAndFeelInfo currentTheme) -> {
@@ -27,11 +28,11 @@ public class ThemeSwitchHelpers {
         return foundThemeIndexAtom.get();
     }
 
-    private UIThemeLookAndFeelInfo getDefaultThemeAndUpdateSettingsState(boolean withChangingState) {
+    private UIThemeLookAndFeelInfo getDefaultThemeAndUpdateSettingsState(boolean shouldChangeState) {
         ThemeSettingsState settingsState = ThemeSettingsState.getInstance();
         UIThemeLookAndFeelInfo defaultTheme;
 
-        if (withChangingState) {
+        if (shouldChangeState) {
             if (settingsState.isUnderDarculaState) {
                 defaultTheme = this.themesManager.getDefaultLightTheme();
                 settingsState.lightThemeId = defaultTheme.getId();
@@ -52,26 +53,29 @@ public class ThemeSwitchHelpers {
         return defaultTheme;
     }
 
-    private UIThemeLookAndFeelInfo getNextThemeToInstall(boolean withChangingState) {
+    private UIThemeLookAndFeelInfo getNextThemeToInstall(boolean shouldChangeState) {
         ThemeSettingsState settingsState = ThemeSettingsState.getInstance();
 
-        String nextThemeId = settingsState.getNextThemeIdToInstall(withChangingState);
-        @Nullable UIThemeLookAndFeelInfo themeToInstall = this.themesManager.findThemeById(nextThemeId);
+        String nextThemeId = settingsState.getNextThemeIdToInstall(shouldChangeState);
+        @Nullable
+        UIThemeLookAndFeelInfo themeToInstall = this.themesManager.findThemeById(nextThemeId);
 
-        return themeToInstall == null ? this.getDefaultThemeAndUpdateSettingsState(withChangingState) : themeToInstall;
+        return themeToInstall == null ? this.getDefaultThemeAndUpdateSettingsState(shouldChangeState) : themeToInstall;
     }
 
     private int getFallbackThemeIndex(boolean isDark) {
         UIThemeLookAndFeelInfo fallbackTheme = isDark
                 ? this.themesManager.getDefaultDarkTheme()
                 : this.themesManager.getDefaultLightTheme();
-        @Nullable Integer fallbackThemeIndex = this.findThemeIndexById(fallbackTheme.getId());
+        @Nullable
+        Integer fallbackThemeIndex = this.findThemeIndexById(fallbackTheme.getId());
 
         return fallbackThemeIndex == null ? 0 : fallbackThemeIndex;
     }
 
     protected int getInstalledThemeIndexById(String themeId, boolean isDark) {
-        @Nullable Integer installedThemeIndex = this.findThemeIndexById(themeId);
+        @Nullable
+        Integer installedThemeIndex = this.findThemeIndexById(themeId);
 
         return installedThemeIndex == null ? this.getFallbackThemeIndex(isDark) : installedThemeIndex;
     }
@@ -79,7 +83,8 @@ public class ThemeSwitchHelpers {
     @Nullable
     protected UIThemeLookAndFeelInfo findThemeByIndex(int themeIndex) {
         AtomicReference<Integer> iAtom = new AtomicReference<>(0);
-        @Nullable AtomicReference<UIThemeLookAndFeelInfo> foundThemeAtom = new AtomicReference<>(null);
+        @Nullable
+        AtomicReference<UIThemeLookAndFeelInfo> foundThemeAtom = new AtomicReference<>(null);
 
         Sequence<UIThemeLookAndFeelInfo> allThemes = this.themesManager.getInstalledThemes();
         allThemes.iterator().forEachRemaining((UIThemeLookAndFeelInfo currentTheme) -> {
@@ -93,17 +98,17 @@ public class ThemeSwitchHelpers {
         return foundThemeAtom.get();
     }
 
-    public void changeTheme(boolean withChangingState) {
+    public void changeTheme(boolean shouldChangeState) {
         ThemeSettingsState settingsState = ThemeSettingsState.getInstance();
 
         try {
-            UIThemeLookAndFeelInfo nextTheme = this.getNextThemeToInstall(withChangingState);
+            UIThemeLookAndFeelInfo nextTheme = this.getNextThemeToInstall(shouldChangeState);
             this.themesManager.changeThemeAndUpdateUi(nextTheme);
         } catch (AssertionError err) {
-            UIThemeLookAndFeelInfo defaultTheme = this.getDefaultThemeAndUpdateSettingsState(withChangingState);
+            UIThemeLookAndFeelInfo defaultTheme = this.getDefaultThemeAndUpdateSettingsState(shouldChangeState);
             this.themesManager.changeThemeAndUpdateUi(defaultTheme);
         } finally {
-            settingsState.switchIsIdeaUnderDarcula(withChangingState);
+            settingsState.switchIsIdeaUnderDarcula(shouldChangeState);
         }
     }
 }

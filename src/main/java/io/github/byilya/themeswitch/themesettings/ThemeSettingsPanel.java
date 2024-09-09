@@ -19,11 +19,10 @@ class ThemeSettingsPanel {
   private final ThemeSwitchHelpers themeSwitchHelpers = new ThemeSwitchHelpers();
 
   private void formThemesSelectionList(
-          JComboBox<String> themesComboBox,
-          String installedThemeId,
-          boolean isDark,
-          Consumer<UIThemeLookAndFeelInfo> onChangeSelected
-  ) {
+      JComboBox<String> themesComboBox,
+      String installedThemeId,
+      boolean isDark,
+      Consumer<UIThemeLookAndFeelInfo> onChangeSelected) {
     Sequence<UIThemeLookAndFeelInfo> allThemes = this.themesManager.getInstalledThemes();
     allThemes.iterator().forEachRemaining((UIThemeLookAndFeelInfo theme) -> themesComboBox.addItem(theme.getName()));
 
@@ -31,15 +30,13 @@ class ThemeSettingsPanel {
 
     themesComboBox.setSelectedIndex(themeIndexToSelect);
     themesComboBox.addActionListener(e -> onChangeSelected.accept(
-            this.themeSwitchHelpers.findThemeByIndex(themesComboBox.getSelectedIndex())
-    ));
+        this.themeSwitchHelpers.findThemeByIndex(themesComboBox.getSelectedIndex())));
   }
 
   private void resetThemesSelectionList(
-          JComboBox<String> comboBox,
-          String previousInstalledThemeId,
-          boolean isDark
-  ) {
+      JComboBox<String> comboBox,
+      String previousInstalledThemeId,
+      boolean isDark) {
     int themeIndexToSelect = this.themeSwitchHelpers.getInstalledThemeIndexById(previousInstalledThemeId, isDark);
     comboBox.setSelectedIndex(themeIndexToSelect);
   }
@@ -48,11 +45,10 @@ class ThemeSettingsPanel {
   private final ComboBox<String> darkThemesComboBox = new ComboBox<>();
 
   protected ThemeSettingsPanel(
-          String installedLightThemeId,
-          String installedDarkThemeId,
-          Consumer<UIThemeLookAndFeelInfo> onChangeLightTheme,
-          Consumer<UIThemeLookAndFeelInfo> onChangeDarkTheme
-  ) {
+      String installedLightThemeId,
+      String installedDarkThemeId,
+      Consumer<UIThemeLookAndFeelInfo> onChangeLightTheme,
+      Consumer<UIThemeLookAndFeelInfo> onChangeDarkTheme) {
     formThemesSelectionList(this.lightThemesComboBox, installedLightThemeId, false, onChangeLightTheme);
     formThemesSelectionList(this.darkThemesComboBox, installedDarkThemeId, true, onChangeDarkTheme);
   }
@@ -88,7 +84,7 @@ class ThemeSettingsPanel {
     contentPane.add(darkThemePane);
 
     contentPane.add(new JPanel());
-    
+
     themeSettingsPanel.add(contentPane, BorderLayout.NORTH);
 
     return themeSettingsPanel;
