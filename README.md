@@ -12,7 +12,7 @@ all set up.👩‍💻
 
 # Version
 
-1.2.2
+1.2.3
 
 # Supported themes
 

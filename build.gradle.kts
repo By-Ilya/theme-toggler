@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "io.theme.toggler"
-version = "1.2.2"
+version = "1.2.3"
 
 repositories {
     mavenCentral()
@@ -12,7 +12,7 @@ repositories {
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
-    version.set("2024.2")
+    version.set("2024.3")
     type.set("IC") // Target IDE Platform
 
     plugins.set(listOf(/* Plugin Dependencies */))
@@ -27,7 +27,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("240")
-        untilBuild.set("242.*")
+        untilBuild.set("")
     }
 
     signPlugin {
